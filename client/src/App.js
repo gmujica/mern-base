@@ -8,7 +8,11 @@ class App extends React.Component {
     name:'',
     email: '',
     phone: '000000000',
-    posts: []
+    posts: [],
+    id: '5f3323c4f92d61244cb8f571'
+    //personal: 'personal',
+    //profesional: 'profesional',
+    //type: 'personal'
   }
 
   componentDidMount = () => {
@@ -20,7 +24,6 @@ class App extends React.Component {
     .then((response) => {
       const data = response.data
       this.setState({ posts: data })
-      console.log('Data has been received!!');
     })
     .catch(() => {
       alert('Error retrieving data!!!')
@@ -36,13 +39,37 @@ class App extends React.Component {
     
   }
 
+  handleDelete = () => {
+    const payload = {
+     id: this.state.id
+
+    }
+    axios({
+      url:'http://localhost:8000/posts',
+      method:'DELETE',
+      data: payload
+    })
+    .then(() =>{
+      console.log('Data has been delete from the server');
+      this.resetUserInputs()
+      this.getPostData()
+    })
+    .catch(() => {
+      console.log('Internal server error');
+    })
+    //this.setState
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
 
     const payload = {
       name: this.state.name,
       email: this.state.email,
-      phone: this.state.phone
+      phone: this.state.phone,
+      //type: this.state.type
+      //personal: this.state.personal,
+      //profesional: this.state.profesional
     }
 
     axios({
@@ -65,20 +92,20 @@ class App extends React.Component {
     this.setState({
       name: '',
       email: '',
-      phone: '',
+      phone: ''
     })
   }
 
   displayItem = (posts) => {
     if(!posts.length) return null
-
+    //<p>{post._id}</p>
     return posts.reverse().map((post, index) => (
       <div key={index} className="card">
         <h3>{post.name}</h3>
         <p>{post.email}</p>
         <p>{post.phone}</p>
         <button className="edit">Edit</button>
-        <button className="delete">Delete</button>
+        <button className="delete" onClick={this.handleDelete}>Delete</button>
       </div>
     ))
   }
@@ -93,6 +120,7 @@ class App extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <div className="form-input">
             <input
+              required
               type="text"
               placeholder="Name"
               name="name"
@@ -102,6 +130,7 @@ class App extends React.Component {
           </div>
           <div className="form-input">
             <input
+              required
               type="text"
               name="email"
               placeholder="Email"
@@ -111,6 +140,7 @@ class App extends React.Component {
           </div>
           <div className="form-input">
             <input
+              required
               type="number"
               name="phone"
               placeholder="Phone"
@@ -118,14 +148,28 @@ class App extends React.Component {
               onChange={this.handleChange}
             />
           </div>
-          <div className="checkbox">
-            <input
-              type="checkbox"
-              name="personal"
-              value={this.state.value}
-              onChange={this.handleChange}
-            />
-          <label>Personal</label>
+          <div className="checkbox-container">
+            <div className="checkbox">
+              <input
+                type="checkbox"
+                name="personal"
+                value={this.state.value}
+                value={this.state.value}
+                onChange={this.handleChange}
+              />
+            <label>Personal</label>
+            </div>
+            <div className="checkbox">
+              <input
+              
+                type="checkbox"
+                value={this.state.value}
+                name="personal"
+                value={this.state.value}
+                onChange={this.handleChange}
+              />
+            <label>Profesional</label>
+            </div>
           </div>
           <button>Add Contact</button>
         </form>

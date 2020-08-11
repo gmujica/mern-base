@@ -2,6 +2,9 @@
   padding: 100px;
 }
 
+h2 {
+  color: #0e64c0;
+}
 
 form {
   width: 50%;
@@ -27,15 +30,12 @@ button {
   color: #fff;
   padding: .375rem .75rem;
   font-size: 1rem;
-  /*line-height: 1.5;*/
   border-radius: .25rem;
   cursor: pointer;
   outline: none;
 }
 
-.checkbox {
-  display: flex;
-}
+
 
 .edit {
   background-color: black;
@@ -51,4 +51,8 @@ button {
   margin: 5px 0px;
   border-radius: 4px;
   padding: 10px;
+}
+
+.checkbox-container {
+  display: flex;
 }

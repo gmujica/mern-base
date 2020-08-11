@@ -18,7 +18,8 @@ router.post('/', async (req,res) => {
      const post = new Post({
         name: req.body.name,
         email: req.body.email,
-        phone: req.body.phone
+        phone: req.body.phone,
+        //type: this.state.personal
     });  
     try {
         const savedPost = await post.save();
