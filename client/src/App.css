@@ -23,18 +23,31 @@ form {
 }
 
 button {
-  background-color: #007bff;
+  background-color: #005ab9;
   color: #fff;
   padding: .375rem .75rem;
   font-size: 1rem;
-  line-height: 1.5;
+  /*line-height: 1.5;*/
   border-radius: .25rem;
   cursor: pointer;
   outline: none;
 }
 
+.checkbox {
+  display: flex;
+}
+
+.edit {
+  background-color: black;
+}
+
+.delete {
+  background-color: crimson;
+}
+
 .card {
-  border: 1px solid lightgrey;
+  background-color: #f8f6f6;
+  border: 1px solid #d3d3d3;
   margin: 5px 0px;
   border-radius: 4px;
   padding: 10px;

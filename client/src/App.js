@@ -77,6 +77,8 @@ class App extends React.Component {
         <h3>{post.name}</h3>
         <p>{post.email}</p>
         <p>{post.phone}</p>
+        <button className="edit">Edit</button>
+        <button className="delete">Delete</button>
       </div>
     ))
   }
@@ -115,6 +117,15 @@ class App extends React.Component {
               value={this.state.value}
               onChange={this.handleChange}
             />
+          </div>
+          <div className="checkbox">
+            <input
+              type="checkbox"
+              name="personal"
+              value={this.state.value}
+              onChange={this.handleChange}
+            />
+          <label>Personal</label>
           </div>
           <button>Add Contact</button>
         </form>
