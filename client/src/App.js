@@ -47,7 +47,7 @@ class App extends React.Component {
 
     }
     axios({
-      url:'http://localhost:8000/posts',
+      url:'http://localhost:8000/posts/',
       method:'DELETE',
       data: payload
     })
