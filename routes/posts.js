@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Post = require('../models/Post');
 
-//GET ALL THE POST
+//GET ALL
 router.get('/', async (req,res) =>{
     try {
         const posts = await Post.find();
@@ -12,12 +12,13 @@ router.get('/', async (req,res) =>{
     }
 });
 
-//SUBMITS A POST
+//SUBMIT
 router.post('/', async (req,res) => {
      console.log(req.body);
-    const post = new Post({
-        title: req.body.title,
-        description: req.body.description
+     const post = new Post({
+        name: req.body.name,
+        email: req.body.email,
+        phone: req.body.phone
     });  
     try {
         const savedPost = await post.save();
@@ -27,7 +28,7 @@ router.post('/', async (req,res) => {
     }
 });
 
-//GET A SPECIFIC POST
+//GET A SPECIFIC 
 router.get('/:postId', async (req,res) => {
     //console.log(req.params.postId);
     try {
@@ -38,7 +39,7 @@ router.get('/:postId', async (req,res) => {
     }
 });
 
-//DELETE POST
+//DELETE 
 router.delete('/:postId', async (req,res) => {
        try {
             const removedPost = await Post.remove({ _id: req.params.postId });
@@ -48,7 +49,7 @@ router.delete('/:postId', async (req,res) => {
         }
 });    
     
-//UPDATE A POST
+//UPDATE
 router.patch('/:postId', async (req,res) => {
     try {
         const updatedPost = await Post.updateOne(

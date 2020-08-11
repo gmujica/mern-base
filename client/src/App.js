@@ -5,8 +5,9 @@ import './App.css'
 class App extends React.Component {
 
   state = {
-    title:'',
-    description: '',
+    name:'',
+    email: '',
+    phone: '000000000',
     posts: []
   }
 
@@ -39,8 +40,9 @@ class App extends React.Component {
     e.preventDefault();
 
     const payload = {
-      title: this.state.title,
-      description: this.state.description
+      name: this.state.name,
+      email: this.state.email,
+      phone: this.state.phone
     }
 
     axios({
@@ -61,8 +63,9 @@ class App extends React.Component {
 
   resetUserInputs = () => {
     this.setState({
-      title: '',
-      description: ''
+      name: '',
+      email: '',
+      phone: '',
     })
   }
 
@@ -71,8 +74,9 @@ class App extends React.Component {
 
     return posts.reverse().map((post, index) => (
       <div key={index} className="card">
-        <h3>{post.title}</h3>
-        <p>{post.description}</p>
+        <h3>{post.name}</h3>
+        <p>{post.email}</p>
+        <p>{post.phone}</p>
       </div>
     ))
   }
@@ -83,28 +87,36 @@ class App extends React.Component {
 
     return (
       <div className="app">
-        <h2>MERN Base for dev</h2>
+        <h2>Add Contact</h2>
         <form onSubmit={this.handleSubmit}>
           <div className="form-input">
             <input
               type="text"
-              placeholder="Title"
-              name="title"
+              placeholder="Name"
+              name="name"
               value={this.state.value}
               onChange={this.handleChange}
             />
           </div>
           <div className="form-input">
-            <textarea
-              name="description"
-              placeholder="description"
-              cols="30"
-              rows="10"
+            <input
+              type="text"
+              name="email"
+              placeholder="Email"
               value={this.state.value}
               onChange={this.handleChange}
             />
           </div>
-          <button>Submit</button>
+          <div className="form-input">
+            <input
+              type="number"
+              name="phone"
+              placeholder="Phone"
+              value={this.state.value}
+              onChange={this.handleChange}
+            />
+          </div>
+          <button>Add Contact</button>
         </form>
 
         <div>
