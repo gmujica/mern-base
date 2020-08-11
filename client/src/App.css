@@ -4,10 +4,15 @@
 
 h2 {
   color: #0e64c0;
+  text-align: center;
+}
+
+h3 {
+  color: #0e64c0;
 }
 
 form {
-  width: 50%;
+  
 }
 
 .form-input {
@@ -55,4 +60,16 @@ button {
 
 .checkbox-container {
   display: flex;
+  margin: 10px 0px;
+}
+
+.info-container {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  
+}
+
+.info-container p {
+  margin-left: 0.6em;
 }

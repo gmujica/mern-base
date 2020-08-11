@@ -1,5 +1,7 @@
 import React from 'react'
 import axios from 'axios'
+import DraftsIcon from '@material-ui/icons/Drafts'
+import PhoneIcon from '@material-ui/icons/Phone'
 import './App.css'
 
 class App extends React.Component {
@@ -102,8 +104,14 @@ class App extends React.Component {
     return posts.reverse().map((post, index) => (
       <div key={index} className="card">
         <h3>{post.name}</h3>
-        <p>{post.email}</p>
-        <p>{post.phone}</p>
+        <div className="info-container">
+          <DraftsIcon />
+          <p>{post.email}</p>
+        </div>
+        <div className="info-container">
+          <PhoneIcon />
+          <p>{post.phone}</p>
+        </div>    
         <button className="edit">Edit</button>
         <button className="delete" onClick={this.handleDelete}>Delete</button>
       </div>
