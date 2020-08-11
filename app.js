@@ -19,6 +19,8 @@ app.get('/', (req,res) =>{
     res.send('Hello Word');
 });
 
+const PORT = 8000
+
 
 //CONNET TO DB
 mongoose.connect(
@@ -27,7 +29,7 @@ mongoose.connect(
         useNewUrlParser: true,
         useUnifiedTopology: true 
     }, 
-    () => console.log('connected to Mongo DB!!! localhost:4000')
+    () => console.log(`connected to Mongo DB!!! Port:${PORT}`)
 );
 
-app.listen(4000);
+app.listen(PORT);

@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import './App.css'
 
 class App extends React.Component {
 
@@ -43,13 +44,14 @@ class App extends React.Component {
     }
 
     axios({
-      url:'http://localhost:4000/posts',
+      url:'http://localhost:8000/posts',
       method:'POST',
       data: payload
     })
     .then(() =>{
       console.log('Data has been sent to the server');
       this.resetUserInputs()
+      this.getPostData()
     })
     .catch(() => {
       console.log('Internal server error');
@@ -64,13 +66,24 @@ class App extends React.Component {
     })
   }
 
+  displayItem = (posts) => {
+    if(!posts.length) return null
+
+    return posts.reverse().map((post, index) => (
+      <div key={index} className="card">
+        <h3>{post.title}</h3>
+        <p>{post.description}</p>
+      </div>
+    ))
+  }
+
   render() {
 
     console.log('State:', this.state);
 
     return (
-      <div>
-        <h2>Hello world</h2>
+      <div className="app">
+        <h2>MERN Base for dev</h2>
         <form onSubmit={this.handleSubmit}>
           <div className="form-input">
             <input
@@ -93,6 +106,10 @@ class App extends React.Component {
           </div>
           <button>Submit</button>
         </form>
+
+        <div>
+          {this.displayItem(this.state.posts)}
+        </div>
       </div>
     );
   }
