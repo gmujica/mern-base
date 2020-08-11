@@ -5,7 +5,24 @@ class App extends React.Component {
 
   state = {
     title:'',
-    description: ''
+    description: '',
+    posts: []
+  }
+
+  componentDidMount = () => {
+    this.getPostData()
+  }
+
+  getPostData = () => {
+    axios.get('/posts')
+    .then((response) => {
+      const data = response.data
+      this.setState({ posts: data })
+      console.log('Data has been received!!');
+    })
+    .catch(() => {
+      alert('Error retrieving data!!!')
+    })
   }
 
   handleChange = ({ target }) => {
