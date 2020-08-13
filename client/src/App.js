@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import './App.css'
 //Axios calls
-import { getPostData } from './axios/querys.js'
+//import { getPostData } from './axios/querys.js'
 
 class App extends React.Component {
 
@@ -21,7 +21,7 @@ class App extends React.Component {
     this.getPostData()
   }
 
-  /*getPostData = () => {
+  getPostData = () => {
     axios.get('/posts')
     .then((response) => {
       const data = response.data
@@ -30,7 +30,7 @@ class App extends React.Component {
     .catch(() => {
       alert('Error retrieving data!!!')
     })
-  }*/
+  }
 
   handleChange = ({ target }) => {
     const { name, value } = target
