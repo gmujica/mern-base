@@ -1,8 +1,8 @@
 import React from 'react'
 import axios from 'axios'
-import DraftsIcon from '@material-ui/icons/Drafts'
-import PhoneIcon from '@material-ui/icons/Phone'
 import './App.css'
+//Axios calls
+import { getPostData } from './axios/querys.js'
 
 class App extends React.Component {
 
@@ -21,7 +21,7 @@ class App extends React.Component {
     this.getPostData()
   }
 
-  getPostData = () => {
+  /*getPostData = () => {
     axios.get('/posts')
     .then((response) => {
       const data = response.data
@@ -30,7 +30,7 @@ class App extends React.Component {
     .catch(() => {
       alert('Error retrieving data!!!')
     })
-  }
+  }*/
 
   handleChange = ({ target }) => {
     const { name, value } = target
@@ -105,11 +105,9 @@ class App extends React.Component {
       <div key={index} className="card">
         <h3>{post.name}</h3>
         <div className="info-container">
-          <DraftsIcon />
           <p>{post.email}</p>
         </div>
         <div className="info-container">
-          <PhoneIcon />
           <p>{post.phone}</p>
         </div>    
         <button className="edit">Edit</button>
