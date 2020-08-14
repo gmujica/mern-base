@@ -2,26 +2,33 @@ import React from 'react'
 import axios from 'axios'
 import './App.css'
 //Axios calls
-//import { getPostData } from './axios/querys.js'
+//import { getItemsData } from './axios/querys.js'
 
 class App extends React.Component {
+  constructor(props) {
+    super(props)
+    //this.getItemsData = this.getItemsData.bind(this)
 
-  state = {
-    name:'',
-    email: '',
-    phone: '000000000',
-    posts: [],
-    id: '5f3323c4f92d61244cb8f571'
-    //personal: 'personal',
-    //profesional: 'profesional',
-    //type: 'personal'
+    this.state = {
+      name:'',
+      email: '',
+      phone: '000000000',
+      posts: [],
+      id: '5f3323c4f92d61244cb8f571'
+      //personal: 'personal',
+      //profesional: 'profesional',
+      //type: 'personal'
+    }
   }
+
+  
 
   componentDidMount = () => {
-    this.getPostData()
+    this.getItemsData()
+    //this.getItemsData.bind(this)
   }
 
-  getPostData = () => {
+  getItemsData = () => {
     axios.get('/posts')
     .then((response) => {
       const data = response.data
@@ -54,7 +61,7 @@ class App extends React.Component {
     .then(() =>{
       console.log('Data has been delete from the server');
       this.resetUserInputs()
-      this.getPostData()
+      this.getItemsData()
     })
     .catch(() => {
       console.log('Internal server error');
@@ -65,7 +72,9 @@ class App extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    const payload = {
+    this.saveItem()
+
+    /*const payload = {
       name: this.state.name,
       email: this.state.email,
       phone: this.state.phone,
@@ -82,12 +91,36 @@ class App extends React.Component {
     .then(() =>{
       console.log('Data has been sent to the server');
       this.resetUserInputs()
-      this.getPostData()
+      this.getItemsData()
+    })
+    .catch(() => {
+      console.log('Internal server error');
+    })*/
+
+  }
+
+  saveItem = () => {
+    const payload = {
+      name: this.state.name,
+      email: this.state.email,
+      phone: this.state.phone,
+      //type: this.state.type
+      //personal: this.state.personal,
+      //profesional: this.state.profesional
+    }
+    axios({
+      url:'http://localhost:8000/posts',
+      method:'POST',
+      data: payload
+    })
+    .then(() =>{
+      console.log('Data has been sent to the server');
+      this.resetUserInputs()
+      this.getItemsData()
     })
     .catch(() => {
       console.log('Internal server error');
     })
-
   }
 
   resetUserInputs = () => {
