@@ -55,15 +55,9 @@ class App extends React.Component {
   }
 
   handleDelete = (e) => {
-    this.setState({
-      _id: e.target.value
-    })
 
-  const id = this.state._id
-
-    console.log('ID:',id)
     axios({
-      url:`http://localhost:8000/posts/${id}`,
+      url:`http://localhost:8000/posts/${e.target.value}`,
       method:'DELETE',
       //data: payload
     })
@@ -75,7 +69,7 @@ class App extends React.Component {
     .catch(() => {
       console.log('Internal server error');
     })
-    //this.setState*/
+ 
   }
 
   handleSubmit = (e) => {
@@ -120,8 +114,8 @@ class App extends React.Component {
   displayItem = (posts) => {
     if(!posts.length) return null
     //<p>{post._id}</p>
-    return posts.reverse().map((post, index) => (
-      <div key={index} className="card">
+    return posts.reverse().map((post) => (
+      <div key={post._id} className="card">
         <h3>{post.name}</h3>
         <div className="info-container">
           <p>{post.email}</p>
