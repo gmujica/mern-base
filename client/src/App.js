@@ -3,11 +3,11 @@ import axios from 'axios'
 import './App.css'
 //Axios calls
 //import { getItemsData } from './axios/querys.js'
+// dev
 
 class App extends React.Component {
   constructor(props) {
     super(props)
-    //this.getItemsData = this.getItemsData.bind(this)
 
     this.state = {
       name:'',
