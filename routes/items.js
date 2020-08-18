@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const Post = require('../models/Post');
+const Item = require('../models/Item');
 
 //GET ALL
 router.get('/', async (req,res) =>{
     try {
-        const posts = await Post.find();
-        res.json(posts);
+        const items = await Item.find();
+        res.json(items);
     } catch(err) {
         res.json({ message:err })
     }
@@ -15,25 +15,25 @@ router.get('/', async (req,res) =>{
 //SUBMIT
 router.post('/', async (req,res) => {
      console.log(req.body);
-     const post = new Post({
+     const item = new Item({
         name: req.body.name,
         email: req.body.email,
         phone: req.body.phone,
         //type: this.state.personal
     });  
     try {
-        const savedPost = await post.save();
-        res.json(savedPost);
+        const savedItem = await item.save();
+        res.json(savedItem);
     } catch (err) {
         res.json({ message: err });
     }
 });
 
 //GET A SPECIFIC 
-router.get('/:postId', async (req,res) => {
-    //console.log(req.params.postId);
+router.get('/:itemId', async (req,res) => {
+    //console.log(req.params.itemId);
     try {
-        const post = await Post.findById(req.params.postId);
+        const post = await Post.findById(req.params.itemId);
         res.json(post);
     }catch(err){
         res.json({ message:err })
@@ -41,20 +41,20 @@ router.get('/:postId', async (req,res) => {
 });
 
 //DELETE 
-router.delete('/:postId', async (req,res) => {
+router.delete('/:itemId', async (req,res) => {
        try {
-            const removedPost = await Post.remove({ _id: req.params.postId });
-            res.json(removedPost);
+            const removedItem = await Item.remove({ _id: req.params.itemId });
+            res.json(removedItem);
         }catch(err){
             res.json({ message:err })
         }
 });    
     
 //UPDATE
-router.patch('/:postId', async (req,res) => {
+router.patch('/:itemId', async (req,res) => {
     try {
-        const updatedPost = await Post.updateOne(
-            { _id: req.params.postId }, 
+        const updatedItem = await Item.updateOne(
+            { _id: req.params.itemId }, 
             { $set: {title: req.body.title} }
         );
         res.json(updatedPost);

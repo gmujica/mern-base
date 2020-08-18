@@ -31,7 +31,7 @@ class App extends React.Component {
 
 
   getItemsData = () => {
-    axios.get('/posts')
+    axios.get('/items')
     .then((response) => {
       const data = response.data
       console.log('getItemsData',data)
@@ -54,10 +54,11 @@ class App extends React.Component {
     
   }
 
-  handleDelete = (e) => {
+  handleDelete = e => {
+    e.preventDefault()
 
     axios({
-      url:`http://localhost:8000/posts/${e.target.value}`,
+      url:`http://localhost:8000/items/${e.target.value}`,
       method:'DELETE',
       //data: payload
     })
@@ -72,6 +73,7 @@ class App extends React.Component {
  
   }
 
+  // Create a Item
   handleSubmit = (e) => {
     e.preventDefault();
 
@@ -79,6 +81,7 @@ class App extends React.Component {
 
   }
 
+  // SAve DAta
   saveItem = () => {
     const payload = {
       name: this.state.name,
@@ -89,7 +92,7 @@ class App extends React.Component {
       //profesional: this.state.profesional
     }
     axios({
-      url:'http://localhost:8000/posts',
+      url:'http://localhost:8000/items',
       method:'POST',
       data: payload
     })
@@ -110,24 +113,24 @@ class App extends React.Component {
       phone: ''
     })
   }
-
-  displayItem = (posts) => {
-    if(!posts.length) return null
+  //Show Items
+  displayItem = (items) => {
+    if(!items.length) return null
     //<p>{post._id}</p>
-    return posts.reverse().map((post) => (
-      <div key={post._id} className="card">
-        <h3>{post.name}</h3>
+    return items.reverse().map((item) => (
+      <div key={item._id} className="card">
+        <h3>{item.name}</h3>
         <div className="info-container">
-          <p>{post.email}</p>
+          <p>{item.email}</p>
         </div>
         <div className="info-container">
-          <p>{post.phone}</p>
+          <p>{item.phone}</p>
         </div>
         <div className="info-container">
-          <p>{post._id}</p>
+          <p>{item._id}</p>
         </div> 
         <button className="edit">Edit</button>
-        <button className="delete" value={post._id} onClick={this.handleDelete}>Delete</button>
+        <button className="delete" value={item._id} onClick={this.handleDelete}>Delete</button>
       </div>
     ))
   }
@@ -139,6 +142,7 @@ class App extends React.Component {
     return (
       <div className="app">
         <h2>Add Contact</h2>
+        
         <form onSubmit={this.handleSubmit}>
           <div className="form-input">
             <input

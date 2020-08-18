@@ -8,11 +8,11 @@ require('dotenv/config');
 app.use(bodyParser.json());
 
 //IMPORT ROUTES
-const postsRoute = require('./routes/posts');
+const itemsRoute = require('./routes/items');
 
 app.use(cors())
 
-app.use('/posts', postsRoute);
+app.use('/items', itemsRoute);
 
 //ROUTES
 app.get('/', (req,res) =>{
