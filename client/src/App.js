@@ -28,11 +28,17 @@ class App extends React.Component {
     //this.getItemsData.bind(this)
   }
 
+
+
   getItemsData = () => {
     axios.get('/posts')
     .then((response) => {
       const data = response.data
-      this.setState({ posts: data })
+      console.log('getItemsData',data)
+      this.setState({ 
+        posts: data,
+        //_id: this.state.data.map(data._id)
+      })
     })
     .catch(() => {
       alert('Error retrieving data!!!')
@@ -48,7 +54,10 @@ class App extends React.Component {
     
   }
 
-  handleDelete = () => {
+  handleDelete = (e) => {
+    this.setState({
+      _id: e.target.value
+    })
 
   const id = this.state._id
 
@@ -124,7 +133,7 @@ class App extends React.Component {
           <p>{post._id}</p>
         </div> 
         <button className="edit">Edit</button>
-        <button className="delete" onClick={this.handleDelete}>Delete</button>
+        <button className="delete" value={post._id} onClick={this.handleDelete}>Delete</button>
       </div>
     ))
   }
