@@ -14,7 +14,7 @@ class App extends React.Component {
       email: '',
       phone: '000000000',
       posts: [],
-      id: '5f3323c4f92d61244cb8f571'
+      _id: ''
       //personal: 'personal',
       //profesional: 'profesional',
       //type: 'personal'
@@ -49,14 +49,14 @@ class App extends React.Component {
   }
 
   handleDelete = () => {
-    const payload = {
-     id: this.state.id
 
-    }
+  const id = this.state._id
+
+    console.log('ID:',id)
     axios({
-      url:'http://localhost:8000/posts/',
+      url:`http://localhost:8000/posts/${id}`,
       method:'DELETE',
-      data: payload
+      //data: payload
     })
     .then(() =>{
       console.log('Data has been delete from the server');
@@ -66,36 +66,13 @@ class App extends React.Component {
     .catch(() => {
       console.log('Internal server error');
     })
-    //this.setState
+    //this.setState*/
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
 
     this.saveItem()
-
-    /*const payload = {
-      name: this.state.name,
-      email: this.state.email,
-      phone: this.state.phone,
-      //type: this.state.type
-      //personal: this.state.personal,
-      //profesional: this.state.profesional
-    }
-
-    axios({
-      url:'http://localhost:8000/posts',
-      method:'POST',
-      data: payload
-    })
-    .then(() =>{
-      console.log('Data has been sent to the server');
-      this.resetUserInputs()
-      this.getItemsData()
-    })
-    .catch(() => {
-      console.log('Internal server error');
-    })*/
 
   }
 
@@ -142,7 +119,10 @@ class App extends React.Component {
         </div>
         <div className="info-container">
           <p>{post.phone}</p>
-        </div>    
+        </div>
+        <div className="info-container">
+          <p>{post._id}</p>
+        </div> 
         <button className="edit">Edit</button>
         <button className="delete" onClick={this.handleDelete}>Delete</button>
       </div>
